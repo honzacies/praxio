@@ -104,6 +104,13 @@ změnou role na stránce `/admin/uzivatele`.
 
 Potřebujete Node.js 20+ a pnpm.
 
+Instalace pnpm:
+```bash
+npm install -g pnpm@12.3.4
+```
+
+Pak:
+
 ```bash
 pnpm install
 pnpm dev
