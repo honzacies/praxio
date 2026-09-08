@@ -1,0 +1,147 @@
+/* Styly HeroUI v3 už v sobě obsahují import Tailwindu v4. */
+@import "@heroui/react/styles";
+
+/* Aby Tailwind našel třídy použité uvnitř komponent HeroUI. */
+@source "../../node_modules/@heroui/react/dist";
+
+/*
+ * Vzhled aplikace.
+ *
+ * HeroUI si všechny barvy, rádiusy i odsazení bere z CSS proměnných.
+ * Stačí je tedy přepsat tady na jednom místě a změna se propíše do všech
+ * tlačítek, karet, tabulek i formulářů, aniž bychom sahali do komponent.
+ *
+ * Paleta stojí na teplé šedé (ne studené modrošedé, která působí chladně)
+ * a červená ze značky Praxio se používá jen tam, kde má něco opravdu
+ * upoutat pozornost – hlavní tlačítko, aktivní odkaz, focus rámeček.
+ */
+:root,
+.light,
+[data-theme="light"] {
+  /* Barvy značky vytažené z loga (docs/logo.pdf). */
+  --praxio-red: #ed1c24;
+  --praxio-red-dark: #bc1c21;
+
+  /* Plochy a text */
+  --background: #fbfbfa;
+  --foreground: #2f2d2a;
+  --surface: #ffffff;
+  --surface-secondary: #f6f5f3;
+  --surface-tertiary: #efedea;
+  --overlay: #ffffff;
+  --muted: #79766f;
+
+  /*
+   * Hlavní barva. Oproti logu je o něco tmavší, aby na ní byl bílý text
+   * dobře čitelný (kontrast přes 5:1, požadavek přístupnosti WCAG AA).
+   */
+  --accent: #c8161d;
+  --accent-foreground: #ffffff;
+
+  /* Stavové barvy jsou schválně tlumené, ať tabulka nepůsobí jako semafor. */
+  --success: #3f7d5c;
+  --success-foreground: #ffffff;
+  --warning: #b4700f;
+  --warning-foreground: #ffffff;
+  --danger: #c0392f;
+  --danger-foreground: #ffffff;
+
+  /* Linky a oddělovače */
+  --border: #e5e3df;
+  --separator: #ecebe7;
+  --default: #f0eeeb;
+  --default-foreground: var(--foreground);
+
+  /* Formulářová pole mají viditelný obrys, aby bylo jasné, kam se píše. */
+  --field-background: #ffffff;
+  --field-border: #dcd9d4;
+  --field-border-width: 1px;
+
+  /* Menší zaoblení působí věcněji než výrazně kulaté rohy. */
+  --radius: 0.375rem;
+  --field-radius: 0.375rem;
+  --ring-offset-width: 2px;
+
+  /*
+   * Komponenta Card si rádius bere z --radius-3xl a ve výchozím nastavení
+   * je hodně kulatá. Přepisujeme ji na stejnou hodnotu, jakou mají ostatní
+   * prvky, aby vzhled držel pohromadě.
+   */
+  --radius-3xl: 0.625rem;
+
+  /*
+   * Stín karet. První hodnota není stín, ale vlas silná obrysová linka –
+   * díky ní má karta ostrý obrys a pod ním jen náznak hloubky.
+   */
+  --surface-shadow:
+    0 0 0 1px var(--border), 0 1px 2px 0 rgb(41 37 33 / 0.04);
+}
+
+/* Tmavý režim zatím aplikace nepřepíná, barvy značky ale drží i tady. */
+.dark,
+[data-theme="dark"] {
+  --accent: #f2454b;
+  --accent-foreground: #ffffff;
+}
+
+body {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Zapne v písmu Inter hezčí tvary číslic a znaků. */
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Nadpisy mají o něco stažené mezery mezi písmeny, působí pak pevněji. */
+h1,
+h2,
+h3 {
+  letter-spacing: -0.015em;
+}
+
+/* Plocha s firemním přechodem – používá ji ikona na přihlašovací stránce. */
+.praxio-gradient {
+  background-image: linear-gradient(
+    160deg,
+    var(--praxio-red-dark),
+    var(--praxio-red)
+  );
+}
+
+/*
+ * Tisk QR kódu.
+ * Bez těchto pravidel by se na papír dostala i navigace, karta s údaji
+ * a tlačítka. Proto všechno schováme a necháme viditelnou jen oblast
+ * označenou třídou praxio-print-area.
+ */
+@media print {
+  body {
+    background: #ffffff;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .praxio-print-area,
+  .praxio-print-area * {
+    visibility: visible;
+  }
+
+  .praxio-print-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 0;
+    padding: 0;
+  }
+
+  /* Na papíře má být kód dost velký, aby ho mobil přečetl i z odstupu. */
+  .praxio-print-area canvas {
+    width: 70mm !important;
+    height: 70mm !important;
+  }
+
+  .praxio-print-hidden {
+    display: none !important;
+  }
+}
