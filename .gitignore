@@ -1,0 +1,16 @@
+node_modules/
+.next/
+out/
+dist/
+.turbo/
+*.tsbuildinfo
+.env
+.env.local
+.DS_Store
+
+# Pracovní poznámky a podklady, které nejsou součástí odevzdávaného díla
+plan.md
+docs/
+
+# Konfigurace vývojového prostředí
+.claude/
